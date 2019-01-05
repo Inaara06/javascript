@@ -1,0 +1,36 @@
+<html>
+<script>
+postFile('https://api.docketrun.com/dockaiapi/speech/tts', '157f3746ad96','d5a2e55b1bd7','hello shweta !!!!!!!')
+  .then(
+    data => {
+      console.log(data);
+      document.getElementById("jsondata").innerHTML = JSON.stringify(data, undefined, 2);
+
+    }
+    //data => $('#jsondata').html(data)
+   
+  )
+  .catch(error => console.error(error))
+
+function postFile(url, your_customer_key,your_secret_key,your_text,) {
+  const formData = new FormData()
+ 
+  
+  formData.append('customer_key', your_customer_key)
+  formData.append('secret_key', your_secret_key)
+  formData.append('text', your_text)
+
+  return fetch(url, {
+    method: 'POST', // 'GET', 'PUT', 'DELETE', etc.
+    body: formData  // Coordinate the body type with 'Content-Type'
+  })
+  .then(
+    response => response.json()
+    
+  )
+}
+</script>
+ <body>
+    <pre id="jsondata"></pre>   
+</body>
+</html>

@@ -1,0 +1,44 @@
+<html>
+<script>
+postFile('http://api.docketrun.com/dockaiapi/object_detection', '02733155a03e','43571be9fc63','input[type="file"].avatar')
+  .then(
+      data =>{
+           console.log(data)
+  document.getElementById("jsondata").innerHTML = JSON.stringify(data, undefined, 2);
+    }
+   )
+  .catch(error => console.error(error))
+
+function postFile(url,your_customer_key,your_secret_key, fileSelector) {
+  const formData = new FormData()
+  const fileField = document.querySelector(fileSelector)
+  
+  formData.append('customer_key', your_customer_key)
+  formData.append('secret_key', your_secret_key)
+  formData.append('avatar', fileField.files[0])
+
+  return fetch(url, {
+    method: 'POST', // 'GET', 'PUT', 'DELETE', etc.
+    body: formData  // Coordinate the body type with 'Content-Type'
+  })
+  .then(response => response.json())
+}
+</script>
+<body>
+        <form action="/my-handling-form-page" method="post">
+            <div>
+              <label for="name">customer_key:</label>
+              <input type="text" id="name" name="your_customer_key">
+            </div>
+            <div>
+              <label for="mail">secret_key:</label>
+              <input type="text" id="mail" name="your_secret_key">
+            </div>
+            <div>
+              <label for="msg">Message:</label>
+              <textarea id="msg" name="user_message"></textarea>
+            </div>
+          </form>
+        <pre id="jsondata"></pre> 
+</body>
+</html>
